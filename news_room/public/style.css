@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    font-family: "Trebuchet MS", sans-serif;
+    background: linear-gradient(135deg, #f5f7fb, #e8edf5);
+    color: #1b1f2a;
+}
+
+.container {
+    max-width: 860px;
+    margin: 2rem auto;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+h1, h2 {
+    margin-top: 0;
+}
+
+a {
+    color: #1f4c9a;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.nav {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+form {
+    display: grid;
+    gap: 0.8rem;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccd2df;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+button {
+    background: #1f4c9a;
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #15366e;
+}
+
+.card {
+    border: 1px solid #e1e5ee;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.message {
+    color: #0c6f38;
+}
+
+.error {
+    color: #b42318;
+}
+
+small {
+    color: #5c667d;
+}

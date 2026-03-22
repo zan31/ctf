@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House Market - Login</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="card narrow">
+    <h1>House Market</h1>
+    <p class="muted">Login to browse and list houses.</p>
+
+    <form id="login-form" class="stack">
+      <label>Username</label>
+      <input type="text" name="username" required>
+
+      <label>Password</label>
+      <input type="password" name="password" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p id="login-msg" class="msg"></p>
+
+    <p class="muted">No account? <a href="/register">Register here</a></p>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

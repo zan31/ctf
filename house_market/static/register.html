@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House Market - Register</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="card narrow">
+    <h1>Create Account</h1>
+    <p class="muted">Registration assigns a random user ID.</p>
+
+    <form id="register-form" class="stack">
+      <label>Username</label>
+      <input type="text" name="username" required>
+
+      <label>Password</label>
+      <input type="password" name="password" required>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <p id="register-msg" class="msg"></p>
+
+    <p class="muted">Have an account? <a href="/login">Back to login</a></p>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

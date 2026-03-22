@@ -1,0 +1,120 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  background: linear-gradient(120deg, #f3efe1, #d9e3f0);
+  color: #1f2937;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+}
+
+.card.narrow {
+  max-width: 460px;
+  margin: 8vh auto;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.stack {
+  display: grid;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+input,
+textarea,
+button {
+  border-radius: 8px;
+  border: 1px solid #9ca3af;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.btn-link {
+  display: inline-block;
+  text-decoration: none;
+  background: #0f766e;
+  color: #ffffff;
+  border: 1px solid #0f766e;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.btn-link:hover {
+  background: #115e59;
+}
+
+button {
+  cursor: pointer;
+  background: #0f766e;
+  color: #ffffff;
+  border: 1px solid #0f766e;
+}
+
+button:hover {
+  background: #115e59;
+}
+
+.muted {
+  color: #4b5563;
+}
+
+.msg {
+  min-height: 22px;
+  color: #b91c1c;
+}
+
+.results {
+  margin-top: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.house {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 10px;
+  background: #f9fafb;
+}
+
+.house img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  display: block;
+  margin-top: 8px;
+}

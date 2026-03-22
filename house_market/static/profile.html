@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House Market - Profile</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Edit Profile</h1>
+    <div class="row">
+      <a class="btn-link" href="/market">Back to Market</a>
+      <button id="logout-btn" type="button">Logout</button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card full">
+      <h2>Owner Notes</h2>
+      <p class="muted">Visible only to the profile owner.</p>
+
+      <form id="profile-form" class="stack">
+        <label>User ID</label>
+        <input id="profile-id" type="text" readonly>
+
+        <label>Username</label>
+        <input id="profile-username" type="text" readonly>
+
+        <label>User Notes</label>
+        <textarea id="profile-notes" name="user_notes" rows="8" required></textarea>
+
+        <button type="submit">Save Notes</button>
+      </form>
+
+      <p id="profile-msg" class="msg"></p>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

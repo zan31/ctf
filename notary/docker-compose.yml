@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    ports:
+      - "1337:1337"
+    read_only: true
+    volumes:
+      - users:/app/users
+      - files:/app/files
+
+volumes:
+  users:
+  files:

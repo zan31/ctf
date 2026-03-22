@@ -1,0 +1,33 @@
+services:
+  web:
+    build: .
+    container_name: news-room-web
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: newsroom
+      DB_USER: newsroom
+      DB_PASSWORD: newsroom
+    volumes:
+      - ./public:/var/www/html
+      - ./src:/var/www/src
+
+  db:
+    image: postgres:15
+    container_name: news-room-db
+    environment:
+      POSTGRES_DB: newsroom
+      POSTGRES_USER: newsroom
+      POSTGRES_PASSWORD: newsroom
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

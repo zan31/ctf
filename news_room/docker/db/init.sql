@@ -1,0 +1,22 @@
+DROP TABLE IF EXISTS news;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    id UUID PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    full_name VARCHAR(120) NOT NULL,
+    email VARCHAR(120) NOT NULL,
+    personal_notes TEXT NOT NULL,
+    is_admin BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE news (
+    id UUID PRIMARY KEY,
+    user_id UUID NOT NULL REFERENCES users(id),
+    title VARCHAR(200) NOT NULL,
+    content TEXT NOT NULL,
+    is_finished BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

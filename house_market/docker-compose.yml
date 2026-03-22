@@ -1,0 +1,21 @@
+services:
+  web:
+    build: .
+    container_name: house_market_web
+    environment:
+      DB_HOST: db
+      DB_PORT: 4444
+      DB_NAME: house_market
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./uploads:/app/uploads
+    depends_on:
+      - db
+
+  db:
+    image: mongo:7
+    container_name: house_market_db
+    command: ["mongod", "--port", "4444", "--bind_ip_all"]
+    ports:
+      - "4444:4444"

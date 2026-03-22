@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House Market</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>House Market</h1>
+    <div class="row">
+      <a class="btn-link" href="/profile">Edit Profile</a>
+      <button id="whoami-btn" type="button">Session Info</button>
+      <button id="logout-btn" type="button">Logout</button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h2>Search Houses</h2>
+      <form id="search-form" class="row">
+        <input type="text" name="q" placeholder="City or title">
+        <button type="submit">Search</button>
+      </form>
+      <p id="search-msg" class="msg"></p>
+      <div id="search-results" class="results"></div>
+    </section>
+
+    <section class="card">
+      <h2>List A House</h2>
+      <form id="upload-form" class="stack" enctype="multipart/form-data">
+        <label>Title</label>
+        <input type="text" name="title" required>
+
+        <label>City</label>
+        <input type="text" name="city" required>
+
+        <label>Price</label>
+        <input type="number" name="price" step="0.01" min="0" required>
+
+        <label>Description</label>
+        <textarea name="description" rows="4" required></textarea>
+
+        <label>Visibility</label>
+        <select name="visibility" required>
+          <option value="public" selected>Public</option>
+          <option value="private">Private</option>
+        </select>
+
+        <label>Image (PNG only)</label>
+        <input type="file" name="image" accept="image/png" required>
+
+        <button type="submit">Upload House</button>
+      </form>
+      <p id="upload-msg" class="msg"></p>
+    </section>
+
+    <section class="card full">
+      <h2>My Listings</h2>
+      <button id="refresh-my" type="button">Refresh</button>
+      <div id="my-results" class="results"></div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
