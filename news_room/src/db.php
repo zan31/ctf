@@ -2,6 +2,16 @@
 
 declare(strict_types=1);
 
+function require_env(string $name): string
+{
+    $value = getenv($name);
+    if ($value === false || trim($value) === '') {
+        throw new RuntimeException("Missing required environment variable: {$name}");
+    }
+
+    return $value;
+}
+
 function get_db(): PDO
 {
     static $pdo = null;
@@ -11,16 +21,17 @@ function get_db(): PDO
         return $pdo;
     }
 
-    $host = getenv('DB_HOST') ?: 'db';
-    $port = getenv('DB_PORT') ?: '5432';
-    $name = getenv('DB_NAME') ?: 'newsroom';
-    $user = getenv('DB_USER') ?: 'newsroom';
-    $password = getenv('DB_PASSWORD') ?: 'newsroom';
+    $host = require_env('DB_HOST');
+    $port = require_env('DB_PORT');
+    $name = require_env('DB_NAME');
+    $user = require_env('DB_USER');
+    $password = require_env('DB_PASSWORD');
 
     $dsn = "pgsql:host={$host};port={$port};dbname={$name}";
     $pdo = new PDO($dsn, $user, $password, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
     ]);
 
     if (!$schemaChecked) {

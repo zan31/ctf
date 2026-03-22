@@ -31,6 +31,27 @@ a:hover {
     display: flex;
     gap: 1rem;
     margin-bottom: 1.5rem;
+    align-items: center;
+}
+
+.nav .nav-inline-form {
+    display: inline;
+    margin: 0;
+}
+
+.nav .nav-link-button {
+    background: transparent;
+    color: #1f4c9a;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+}
+
+.nav .nav-link-button:hover {
+    background: transparent;
+    text-decoration: underline;
 }
 
 form {

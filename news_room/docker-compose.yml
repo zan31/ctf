@@ -9,9 +9,9 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 5432
-      DB_NAME: newsroom
-      DB_USER: newsroom
-      DB_PASSWORD: newsroom
+      DB_NAME: ${DB_NAME:-newsroom}
+      DB_USER: ${DB_USER:-newsroom}
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
     volumes:
       - ./public:/var/www/html
       - ./src:/var/www/src
@@ -20,11 +20,9 @@ services:
     image: postgres:15
     container_name: news-room-db
     environment:
-      POSTGRES_DB: newsroom
-      POSTGRES_USER: newsroom
-      POSTGRES_PASSWORD: newsroom
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: ${DB_NAME:-newsroom}
+      POSTGRES_USER: ${DB_USER:-newsroom}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
     volumes:
       - ./docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
       - postgres_data:/var/lib/postgresql/data

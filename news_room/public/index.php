@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-session_start();
+require_once '/var/www/src/auth.php';
 
-if (isset($_SESSION['user_id'])) {
+if (current_user_id() !== null) {
     header('Location: /news.php');
     exit;
 }

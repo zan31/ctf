@@ -13,11 +13,13 @@ $error = '';
 $assignedId = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = trim($_POST['title'] ?? '');
-    $content = trim($_POST['content'] ?? '');
+    $title = trim((string) ($_POST['title'] ?? ''));
+    $content = trim((string) ($_POST['content'] ?? ''));
     $isFinished = isset($_POST['is_finished']) ? 1 : 0;
 
-    if ($title === '' || $content === '') {
+    if (!verify_csrf_token($_POST['csrf_token'] ?? null)) {
+        $error = 'Invalid request token. Please refresh and try again.';
+    } elseif ($title === '' || $content === '') {
         $error = 'Title and content are required.';
     } else {
         $namespace = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
@@ -56,7 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="nav">
         <a href="/news.php">News</a>
         <a href="/upload_news.php">Upload News</a>
-        <a href="/logout.php">Logout</a>
+        <form method="post" action="/logout.php" class="nav-inline-form">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8') ?>">
+            <button type="submit" class="nav-link-button">Logout</button>
+        </form>
     </div>
 
     <h1>Upload News</h1>
@@ -70,6 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <form method="post">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8') ?>">
+
         <label>Title</label>
         <input type="text" name="title" required>
 

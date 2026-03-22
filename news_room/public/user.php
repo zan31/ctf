@@ -7,12 +7,20 @@ require_once '/var/www/src/auth.php';
 
 require_login();
 
-$userId = isset($_GET['id']) ? trim((string) $_GET['id']) : (string) $_SESSION['user_id'];
+$currentUserId = (string) $_SESSION['user_id'];
+$requestedUserId = isset($_GET['id']) ? trim((string) $_GET['id']) : $currentUserId;
+$forbidden = false;
+$user = false;
 
-$sql = 'SELECT id, username, full_name, email, personal_notes, is_admin FROM users WHERE id = :id';
-$stmt = get_db()->prepare($sql);
-$stmt->execute([':id' => $userId]);
-$user = $stmt->fetch();
+if ($requestedUserId !== $currentUserId && !current_is_admin()) {
+    http_response_code(403);
+    $forbidden = true;
+} else {
+    $sql = 'SELECT id, username, full_name, email, personal_notes, is_admin FROM users WHERE id = :id';
+    $stmt = get_db()->prepare($sql);
+    $stmt->execute([':id' => $requestedUserId]);
+    $user = $stmt->fetch();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,21 +35,27 @@ $user = $stmt->fetch();
     <div class="nav">
         <a href="/news.php">News</a>
         <a href="/upload_news.php">Upload News</a>
-        <a href="/logout.php">Logout</a>
+        <a href="/user.php?id=<?= urlencode($currentUserId) ?>">My Profile</a>
+        <form method="post" action="/logout.php" class="nav-inline-form">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8') ?>">
+            <button type="submit" class="nav-link-button">Logout</button>
+        </form>
     </div>
 
     <h1>User Profile</h1>
 
-    <?php if (!$user): ?>
+    <?php if ($forbidden): ?>
+        <p class="error">Forbidden.</p>
+    <?php elseif (!$user): ?>
         <p class="error">User not found.</p>
     <?php else: ?>
         <div class="card">
             <p><strong>UUID:</strong> <?= htmlspecialchars((string) $user['id'], ENT_QUOTES, 'UTF-8') ?></p>
-            <p><strong>Username:</strong> <?= htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8') ?></p>
-            <p><strong>Full Name:</strong> <?= htmlspecialchars($user['full_name'], ENT_QUOTES, 'UTF-8') ?></p>
-            <p><strong>Email:</strong> <?= htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') ?></p>
-            <p><strong>Personal Notes:</strong> <?= htmlspecialchars($user['personal_notes'], ENT_QUOTES, 'UTF-8') ?></p>
-            <p><strong>Admin:</strong> <?= $user['is_admin'] ? 'yes' : 'no' ?></p>
+            <p><strong>Username:</strong> <?= htmlspecialchars((string) $user['username'], ENT_QUOTES, 'UTF-8') ?></p>
+            <p><strong>Full Name:</strong> <?= htmlspecialchars((string) $user['full_name'], ENT_QUOTES, 'UTF-8') ?></p>
+            <p><strong>Email:</strong> <?= htmlspecialchars((string) $user['email'], ENT_QUOTES, 'UTF-8') ?></p>
+            <p><strong>Personal Notes:</strong> <?= htmlspecialchars((string) $user['personal_notes'], ENT_QUOTES, 'UTF-8') ?></p>
+            <p><strong>Admin:</strong> <?= !empty($user['is_admin']) ? 'yes' : 'no' ?></p>
         </div>
     <?php endif; ?>
 </div>
